@@ -51,3 +51,17 @@ void usart_interrupt(void) __interrupt 4
         TI = 0;
     }
 }
+
+void init_serial(void)
+{
+    TMOD = 0b00100000;
+    PCON |= SMOD;
+    TL1 = 0xFA;
+    TH1 = 0xFA;
+    TR1 = 1;
+    REN = 1;
+    SM0 = 0;
+    SM1 = 1;
+    EA = 1;
+    ES = 1;
+}

@@ -13,27 +13,9 @@ void delay(int us)
     }
 }
 
-void setup()
-{
-    //PCON |= SMOD;
-    //TMOD = 0b01000000;
-    TMOD = 0x20;
-    TL1 = 0xFD;
-    TH1 = 0xFD;
-    TR1 = 1;
-    REN = 1;
-    SM0 = 0;
-    SM1 = 1;
-    EA = 1;
-    ES = 1;
-
-    void *tt = malloc(100);
-    free(tt);
-}
-
 void main()
 {
-    setup();
+    init_serial();
 
     unsigned char msg[16] = {0};
 
