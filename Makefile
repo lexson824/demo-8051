@@ -1,14 +1,10 @@
 # Makefile
 
-all: demo.ihx
-
-%.rel: %.c
-	sdcc -c $<
-
-demo.ihx: main.rel serial.rel timer.rel
-	sdcc -o $@ $^
+all: src/demo.ihx
+	$(MAKE) -C src
+	cp src/demo.ihx .
 
 clean:
-	rm -f *.lst *.rel *.rst *.sym *.asm *.ihx *.lk *.lst *.map *.mem
+	$(MAKE) -C src clean
 
 .PHONY: all clean
