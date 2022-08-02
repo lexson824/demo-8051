@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "serial.h"
+#include "timer.h"
 
 void delay(int us)
 {
@@ -16,15 +17,19 @@ void delay(int us)
 void main()
 {
     init_serial();
+    init_timer();
+    EA = 1;
 
     unsigned char msg[16] = {0};
 
     for (;;) {
-        send_serial("recv: ", 6);
         memset(msg, 0, sizeof(msg));
         int len = recv_serial(msg, sizeof(msg));
-        send_serial(msg, len);
-        send_serial("\r\n", 2);
+        if (len) {
+            send_serial("echo: ", 6);
+            send_serial(msg, len);
+            send_serial("\r\n", 2);
+        }
         delay(100);
     }
 }

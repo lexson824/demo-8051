@@ -5,7 +5,7 @@ all: demo.ihx
 %.rel: %.c
 	sdcc -c $<
 
-demo.ihx: main.rel serial.rel
+demo.ihx: main.rel serial.rel timer.rel
 	sdcc -o $@ $^
 
 clean:

@@ -54,7 +54,8 @@ void usart_interrupt(void) __interrupt 4
 
 void init_serial(void)
 {
-    TMOD = 0b00100000;
+    // only set T1
+    TMOD = 0b00100000 + (TMOD & 0b00001111);
     PCON |= SMOD;
     TL1 = 0xFA;
     TH1 = 0xFA;
@@ -62,6 +63,5 @@ void init_serial(void)
     REN = 1;
     SM0 = 0;
     SM1 = 1;
-    EA = 1;
     ES = 1;
 }
