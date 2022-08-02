@@ -1,6 +1,6 @@
 # Makefile
 
-all: src/demo.ihx
+all:
 	$(MAKE) -C src
 	cp src/demo.ihx .
 
