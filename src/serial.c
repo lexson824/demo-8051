@@ -9,6 +9,9 @@ unsigned char recv_buffer[16] = "yon";
 
 int recv_serial(unsigned char *buffer, int size)
 {
+    if (recv_idx == 0)
+        return 0;
+
     int retval = 0;
     ES = 0;
     if (size >= recv_idx) {

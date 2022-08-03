@@ -6,8 +6,8 @@
 void timer0_interrupt(void) __interrupt 1
 {
     static int cnt = 0;
-    TH0 = (65536 - (unsigned short)MS50_MACHINE_CYCLE_CNT) / 256;
-    TL0 = (65536 - (unsigned short)MS50_MACHINE_CYCLE_CNT) % 256;
+    TH0 = (65536 - (unsigned short)(MS_MACHINE_CYCLE_CNT * 50)) / 256;
+    TL0 = (65536 - (unsigned short)(MS_MACHINE_CYCLE_CNT * 50)) % 256;
     cnt++;
 
     if (cnt >= 20) {
@@ -20,8 +20,8 @@ void timer0_interrupt(void) __interrupt 1
 void init_timer(void)
 {
     TMOD = 0b00000001 + (TMOD & 0b11110000);
-    TH0 = (65536 - (unsigned short)MS50_MACHINE_CYCLE_CNT) / 256;
-    TL0 = (65536 - (unsigned short)MS50_MACHINE_CYCLE_CNT) % 256;
+    TH0 = (65536 - (unsigned short)(MS_MACHINE_CYCLE_CNT * 50)) / 256;
+    TL0 = (65536 - (unsigned short)(MS_MACHINE_CYCLE_CNT * 50)) % 256;
     TR0 = 1;
     ET0 = 1;
 }

@@ -1,15 +1,14 @@
 #include <8052.h>
 #include <string.h>
 #include <stdlib.h>
+#include "osc.h"
 #include "serial.h"
 #include "timer.h"
 
-void delay(int us)
+void delay(unsigned short ms)
 {
-    for (int i = 0; i < us; i++) {
-        for (int j = 0; j < 100; j++) {
-            for (int k = 0; k < 100; k++) {
-            }
+    for (; ms > 0; ms--) {
+        for (unsigned short i = MS_MACHINE_CYCLE_CNT / 12; i > 0; i--) {
         }
     }
 }
@@ -30,6 +29,8 @@ void main()
             send_serial(msg, len);
             send_serial("\r\n", 2);
         }
-        delay(100);
+        send_serial("idle-st...\r\n", 12);
+        delay(2000);
+        send_serial("idle-ed...\r\n", 12);
     }
 }
